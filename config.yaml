@@ -1,3 +1,0 @@
-serveur:
-  port: 3000
-  nom: "Mon petit serveur Express"
