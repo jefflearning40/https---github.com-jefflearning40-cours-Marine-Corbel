@@ -1,0 +1,46 @@
+------- app.js/server.js/index.js:
+import express from "express";
+import router from "./routes/routes.js";
+import userRouter from "./routes/user.route.js";
+const app = express();
+
+app.use(express.json());
+
+app.use("/hello", router);
+
+app.use("/users", userRouter);
+
+
+app.listen(3000, () => {
+  console.log("server demarré sur ::: http://localhost:3000");
+});
+
+------- user.route.js :
+import express from 'express';
+import {createUser,users,readUser2} from '../controllers/user.controller.js'
+const userRouter = express.Router();
+
+
+userRouter.post('/',createUser)
+
+userRouter.get('/',(req,res)=>{
+    res.send(users);
+});
+userRouter.get('/user2',readUser2);
+
+export default userRouter;
+
+-------  user.controller.js :
+export let users=[];
+
+
+export const createUser = (req,res)=>{
+    users.push(req.body);
+    console.log(users);
+    res.send(users);
+}
+export const readUser2 = (req,res)=>{
+    res.send(users[3]);
+
+
+}; 
